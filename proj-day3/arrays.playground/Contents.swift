@@ -12,5 +12,19 @@ print(beatles[3])
 
 print(numbers[0])
 
+var friends = Array<String>()
+friends.append("Mao")
+friends.append("Phat")
+friends.append("Tin")
+print(friends[1])
+
+var daysOfWeek = [String]()
+daysOfWeek.append("Monday")
+daysOfWeek.append("Saturday")
+print(daysOfWeek)
+
+
+
+
 
 
