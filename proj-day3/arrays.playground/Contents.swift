@@ -10,4 +10,7 @@ print(beatles[1])
 print(beatles[2])
 print(beatles[3])
 
+print(numbers[0])
+
+
 
