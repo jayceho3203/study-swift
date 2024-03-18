@@ -63,3 +63,20 @@ enum Size: Comparable {
     case large
 }
 print(Size.small > Size.large)
+
+enum transportOption {
+    case airplane, helicopter, bicycle, car, escooter
+}
+
+let transport = transportOption.bicycle
+
+if transport == .airplane || transport == .helicopter {
+    print("Let's fly ... ")
+} else if transport == .bicycle {
+    print("I hope there is a bike path... ")
+} else if transport == .car {
+    print("Time to get stuck in traffic")
+} else {
+    print("I'm going to hire a scooter now!")
+}
+
