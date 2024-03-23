@@ -27,3 +27,5 @@ let theme = Theme.dark
 let background = theme == .dark ? "black" : "white"
 
 print(background)
+
+var singers = ["Taylor Swift"]
