@@ -11,13 +11,17 @@ for filename in filenames {
     print("founded file: \(filename)")
 }
 
-let number1 = 1
+let number1 = 2
 let number2 = 14
 var multiples = [Int]()
 
-for i in 1...1_000_000 {
+for i in 1...1000_000 {
     if i.isMultiple(of: number1) && i.isMultiple(of: number2){
         multiples.append(i)
+        if multiples.count == 10 {
+            break
+        }
     }
-    
 }
+
+print(multiples)
