@@ -38,3 +38,24 @@ func pythagoras (a: Double, b: Double) -> Double {
 
 var root =  pythagoras(a: 3, b: 4)
 print(root)
+
+//  RETURN MULTIPLE VALUES
+func getUser1() -> [String] {
+    ["Jayce", "Ho"]
+}
+
+let user1 = getUser1()
+print(user1, user1[0], user1[1])
+
+func getUser2() -> [String : Any] {
+    ["firstname": "jayce",
+      "lastname": "ho"]
+}
+let user2 = getUser2()
+print("user's firstname: \(user2["firstname", default: "nknowned"])")
+print("user's age: \(user2["age", default: "unknowned"])")
+
+func getUser3() -> (firstname: string, lastname: string, age: Int){
+    (firstname: "jayce", lastname: "ho", age:21)
+    
+}
