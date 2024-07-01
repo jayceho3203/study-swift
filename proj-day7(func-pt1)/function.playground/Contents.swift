@@ -16,8 +16,8 @@ showGreeting()
 func modulo(divisor: Int, dividend: Int) -> Int {
     return divisor % dividend
 }
-
 modulo(divisor: 10, dividend: 3)
+
 func checkMultiple(number: Int, of: Int){
     if number % of == 0 {
         print("\(number) is a multiple of \(of)")
@@ -27,7 +27,6 @@ func checkMultiple(number: Int, of: Int){
         print(mod)
     }
 }
-
 checkMultiple(number: 50, of: 13)
 checkMultiple(number: 777, of: 3)
 checkMultiple(number: 10, of:3)
@@ -77,3 +76,29 @@ print("Name: \(firstName) \(lastName)")
 
 let (ten, _, _) = getUser3()
 print("first name: \(ten)")
+
+func rollDice (sides: Int, times: Int) -> [Int] {
+    var rolls = [Int]()
+    for _ in 1...times {
+        let roll = Int.random(in: 1...sides)
+        rolls.append(roll)
+    }
+    return rolls
+}
+
+rollDice(sides: 6, times: 5)
+
+func isUppercase(_ string: String) -> Bool {
+    string == string.uppercased()
+}
+
+let string = "HELLO, WORLD!"
+let result = isUppercase(string)
+
+
+func printTimesTables ( for number: Int){
+    for i in 1...10 {
+        print("\(i) * \(number) = \(i * number)")
+    }
+}
+printTimesTables(for: 6)
