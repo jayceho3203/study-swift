@@ -30,3 +30,14 @@ if success {
 } else {
     print("Not enough money ")
 }
+struct Contributor {
+    private var name = "Anonymous"
+}
+let paul = Contributor()
+
+struct Doctor {
+    var name: String
+    var location: String
+    private var currentPatient = "No one"
+}
+let drJones = Doctor(name: "Esther Jones", location: "Bristol")
