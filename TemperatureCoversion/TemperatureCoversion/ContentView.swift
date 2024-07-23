@@ -40,10 +40,13 @@ struct ContentView: View {
     @State private var outputUnit : TemperatureScale = .fahrenheit
     @State private var inputValue = "0"
     @FocusState private var isInputFocused : Bool
-    var outputValue : Double {
-        let inputDouble = Double(inputValue) ?? 0.0
+    var outputValue : String {
+        guard let inputDouble = Double(inputValue), !inputValue.isEmpty else {
+            return "Enter input value"
+        }
         let celsiusValue = toCelsius(inputDouble, from: inputUnit)
-        return fromCelsius(celsiusValue, to: outputUnit)
+        let result = fromCelsius(celsiusValue, to: outputUnit)
+        return result.formatted()
     }
     var body: some View {
         NavigationStack{
@@ -84,10 +87,13 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(outputValue.formatted())
+                    Text(outputValue)
                 }
+                
+                
             }
-            .navigationTitle("Quy đổi nhiệt độ")
+            .navigationTitle("Convert temperature")
+            
         }
         
         
