@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var checkAmount = 0.0
-    @State private var numberOfPeople = 0
+    @State private var numberOfPeople = 2
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocus : Bool
     
@@ -20,6 +20,12 @@ struct ContentView: View {
         let grandTotal = checkAmount + tipValue
         let amountPerPerson = grandTotal / peopleCount
         return amountPerPerson
+    }
+    
+    var grandTotal : Double {
+        let tipSelection = Double(tipPercentage)
+        let tipValue = checkAmount * tipSelection / 100
+        return checkAmount + tipValue
     }
     let tipPercentages = [10, 15, 20, 25, 0]
     
@@ -33,30 +39,39 @@ struct ContentView: View {
                     .focused($amountIsFocus)
                     
                     Picker("Number of People", selection: $numberOfPeople) {
-                        ForEach (0..<100) {
-                            Text("\($0 + 2) people")
+                        ForEach (2..<100) {
+                            Text("\($0) people ")
                         }
+                    
+                    }
+                    }
                     .pickerStyle(.menu)
                     .onAppear(){
-                        print("picker appear")
-                    }
+                        print(numberOfPeople)
 
-                    }
                 
                 }
                 
                 Section("How much do you want to tip?") {
                     Picker("Tip  Percentage", selection: $tipPercentage) {
-                        ForEach (tipPercentages, id: \.self) {
+                        ForEach (0..<101) {
                             Text($0, format: .percent)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.navigationLink)
+                    .onAppear() {
+                        print(tipPercentage)
+                    }
                 }
                 
-                Section {
+                Section ("Total amount") {
+                    Text(grandTotal, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+                
+                Section("Amount per person") {
                     Text (totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
+                
             }
             
             .navigationTitle("WeSplit")
