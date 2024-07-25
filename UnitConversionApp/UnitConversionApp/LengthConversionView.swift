@@ -1,51 +1,61 @@
 //
-//  ContentView.swift
-//  TemperatureCoversion
+//  LengthConversionView.swift
+//  UnitConversionApp
 //
-//  Created by Jayce Ho on 23/07/2024.
+//  Created by Jayce Ho on 24/07/2024.
 //
 
 import SwiftUI
 
-enum TemperatureScale : String, CaseIterable {
-    case celsius = "Celsius"
-    case fahrenheit = "Farenheit"
-    case kelvin = "Kelvin"
+enum LengthScale : String, CaseIterable {
+    case meter = "Meters"
+    case kilometer = "Kilometers"
+    case feet = "Feet"
+    case yard = "Yards"
+    case mile = "Miles"
 }
 
-func toCelsius(_ value : Double, from scale : TemperatureScale) -> Double{
+func toMeter(_ value : Double, from scale : LengthScale) -> Double{
     switch scale {
-    case .celsius:
+    case .meter:
         return value
-    case .fahrenheit:
-        return (value - 32) * 5/9
-    case .kelvin:
-        return value - 273.15
+    case .kilometer:
+        return value * 1000
+    case .feet:
+        return value * 0.3048
+    case .yard:
+        return value * 0.9144
+    case .mile:
+        return value * 1609.344
     }
 }
 
-func fromCelsius(_ value: Double, to scale: TemperatureScale) -> Double{
+func fromMeter(_ value: Double, to scale: LengthScale) -> Double{
     switch scale {
-    case .celsius:
+    case .meter:
         return value
-    case .fahrenheit:
-        return value * 9/5 + 32
-    case .kelvin:
-        return value + 273.15
+    case .kilometer:
+        return value / 1000
+    case .feet:
+        return value / 0.3048
+    case .yard:
+        return value / 0.9144
+    case .mile:
+        return value / 1609.344
     }
 }
 
-struct ContentView: View {
-    @State private var inputUnit : TemperatureScale = .celsius
-    @State private var outputUnit : TemperatureScale = .fahrenheit
+struct LengthConversionView: View {
+    @State private var inputUnit : LengthScale = .meter
+    @State private var outputUnit : LengthScale = .feet
     @State private var inputValue = "0"
     @FocusState private var isInputFocused : Bool
     var outputValue : String {
         guard let inputDouble = Double(inputValue), !inputValue.isEmpty else {
             return "Enter input value"
         }
-        let celsiusValue = toCelsius(inputDouble, from: inputUnit)
-        let result = fromCelsius(celsiusValue, to: outputUnit)
+        let meterValue = toMeter(inputDouble, from: inputUnit)
+        let result = fromMeter(meterValue, to: outputUnit)
         return result.formatted()
     }
     var body: some View {
@@ -70,7 +80,7 @@ struct ContentView: View {
                     }
                     
                     Picker("From", selection: $inputUnit ) {
-                        ForEach(TemperatureScale.allCases, id: \.self) { scale in
+                        ForEach(LengthScale.allCases, id: \.self) { scale in
                             Text(scale.rawValue).tag(scale)
                         }
                     }
@@ -79,7 +89,7 @@ struct ContentView: View {
                 
                 Section("Output") {
                     Picker ("To", selection: $outputUnit){
-                        ForEach(TemperatureScale.allCases, id: \.self){ scale in
+                        ForEach(LengthScale.allCases, id: \.self){ scale in
                             Text(scale.rawValue).tag(scale)
                         }
                     }
@@ -92,7 +102,7 @@ struct ContentView: View {
                 
                 
             }
-            .navigationTitle("Convert temperature")
+            .navigationTitle("Convert Length")
             
         }
         
@@ -100,8 +110,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LengthConversionView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        LengthConversionView()
     }
 }
+
